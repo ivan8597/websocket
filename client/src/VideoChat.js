@@ -9,20 +9,19 @@ const VideoChat = ({ socket, user, room }) => {
     const getUserMedia = async () => {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 
-      if (localVideoRef.current) {
-        localVideoRef.current.srcObject = stream;
+      if (localVideoRef.current) {localVideoRef.current.srcObject = stream;
       }
 
       peerRef.current = new RTCPeerConnection();
-      stream.getTracks().forEach(track => peerRef.current.addTrack(track, stream));
+      stream.getTracks().forEach((track) => peerRef.current.addTrack(track, stream));
 
-      peerRef.current.onicecandidate = event => {
+      peerRef.current.onicecandidate = (event) => {
         if (event.candidate) {
           socket.emit("signal", { candidate: event.candidate, room });
         }
       };
 
-      peerRef.current.ontrack = event => {
+      peerRef.current.ontrack = (event) => {
         if (remoteVideoRef.current) {
           remoteVideoRef.current.srcObject = event.streams[0];
         }
@@ -47,7 +46,7 @@ const VideoChat = ({ socket, user, room }) => {
     return () => {
       socket.off("signal");
     };
-  }, [socket,user, room]);
+  }, [socket, room]);
 
   return (
     <div>

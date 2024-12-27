@@ -1,7 +1,6 @@
 import "./App.css";
 import { useState } from "react";
 import io from "socket.io-client";
-
 import Chat from "./Chat";
 import VideoChat from "./VideoChat";
 
@@ -17,8 +16,7 @@ function App() {
     if (user !== "" && room !== "") {
       socket.emit("join_room", room);
       setShowChat(true);
-      // Определите, нужно ли включить видеочат
-      setIsVideoChatEnabled(true); // Например, здесь можно добавить условие
+      setIsVideoChatEnabled(true); // Включить видеочат, если необходимо
     }
   };
 
@@ -30,26 +28,18 @@ function App() {
           <input
             type="text"
             placeholder="John..."
-            onChange={(e) => {
-              setUser(e.target.value);
-            }}
+            onChange={(e) => setUser(e.target.value)}
           />
           <input
             type="text"
             placeholder="Room ID..."
-            onChange={(e) => {
-              setRoom(e.target.value);
-            }}
+            onChange={(e) => setRoom(e.target.value)}
           />
           <button onClick={joinRoom}>Join Room</button>
         </div>
       ) : (
         <div>
-          {isVideoChatEnabled ? (
-            <VideoChat socket={socket} user={user} room={room} />
-          ) : (
-            <p>Video chat is not available in this room.</p>
-          )}
+          {isVideoChatEnabled && <VideoChat socket={socket} user={user} room={room} />}
           <Chat socket={socket} user={user} room={room} />
         </div>
       )}

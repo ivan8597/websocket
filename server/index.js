@@ -14,11 +14,9 @@ io.on("connection", (socket) => {
     console.log(`User with ID: ${socket.id} joined room: ${room}`);
   });
 
-  socket.on("signal", (data) => {
-    // Убедитесь, что `room` присутствует в `data`
-    if (data.room) {
-      socket.to(data.room).emit("signal", data);
-    }
+  socket.on("send_message", (messageData) => {
+    // Отправка сообщения всем пользователям в комнате
+    io.to(messageData.room).emit("receive_message", messageData);
   });
 
   socket.on("disconnect", () => {

@@ -51,8 +51,8 @@ body {
 }
 
 .chat-window {
-  width: 300px;
-  height: 420px;
+  width: 490px;
+  height: 490px;
 }
 
 .chat-window p {
@@ -81,12 +81,24 @@ body {
   position: relative;
 }
 .chat-window .chat-body .message-container {
-  width: 100%;
-  height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
+.message-container {
+  border-bottom: 1px solid rgb(0, 21, 255);
+
+  margin-top: 9px;
+  margin-right: 9px;
+  word-break: break-word;
+  overflow-x: auto;
+  display: flex;
+  justify-content: space-between;
+
+  max-width: 90%;
+  align-items: center;
+  margin-left: 9px;
+}
 .chat-window .chat-body .message-container::-webkit-scrollbar {
   display: none;
 }
@@ -115,7 +127,8 @@ body {
 }
 
 .chat-body {
-  overflow-y: auto;
+  max-height: 300px; /* Максимальная высота для области сообщений */
+  overflow-y: auto; /* Включает полосу прокрутки, если содержимое превышает высоту */
 }
 #you {
   justify-content: flex-start;
@@ -173,6 +186,55 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.messages {
+  word-break: break-word;
+}
+h3 {
+  margin: 0; /* Убираем отступы для заголовка */
+  display: flex; /* Используем flexbox для выравнивания */
+  justify-content: space-between; /* Распределяем пространство между элементами */
+  align-items: center; /* Выравниваем элементы по центру по вертикали */
+  word-break: break-word; /* Позволяет переносить текст на следующую строку */
+}
+
+.edit-button {
+  background: none;
+  border: none;
+  color: #007bff; /* Цвет для кнопки редактирования */
+  cursor: pointer;
+  font-size: 20px; /* Размер иконки */
+}
+
+.edit-button:hover {
+  color: #0056b3; /* Цвет при наведении */
+}
+.delete-button9 {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: yellow;
+  font-size: 16px;
+  margin-bottom: 29px;
+}
+.track {
+  height: 19px;
+  margin-left: 9px;
+}
+.delete-button {
+  margin-left: 149px;
+  margin-bottom: 3px;
+
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: yellow;
+  font-size: 16px;
+}
+
+.msg {
+  margin-left: 9px;
+  margin-right: 9px;
+}
 .chat-window .chat-footer button {
   border: 0;
   display: grid;

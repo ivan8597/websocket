@@ -1,8 +1,8 @@
-import "./App.css";
+import "./components/App.css";
 import { useState } from "react";
 import io from "socket.io-client";
-import Chat from "./Chat";
-import VideoChat from "./VideoChat";
+import Chat from "./components/Chat";
+import VideoChat from "./components/VideoChat";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -16,8 +16,11 @@ function App() {
     if (user !== "" && room !== "") {
       socket.emit("join_room", room);
       setShowChat(true);
-      setIsVideoChatEnabled(true); // Включить видеочат, если необходимо
     }
+  };
+
+  const toggleVideoChat = () => {
+    setIsVideoChatEnabled((prev) => !prev);
   };
 
   return (
@@ -39,6 +42,9 @@ function App() {
         </div>
       ) : (
         <div>
+          <button onClick={toggleVideoChat}>
+            {isVideoChatEnabled ? "Disable Video Chat" : "Enable Video Chat"}
+          </button>
           {isVideoChatEnabled && <VideoChat socket={socket} user={user} room={room} />}
           <Chat socket={socket} user={user} room={room} />
         </div>
